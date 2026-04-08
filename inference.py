@@ -25,9 +25,7 @@ HF_TOKEN = os.getenv("HF_TOKEN")
 if not HF_TOKEN:
     raise ValueError("HF_TOKEN environment variable is required.")
 
-IMAGE_NAME = os.getenv(
-    "IMAGE_NAME", "customs-trade-classification:latest"
-)
+LOCAL_IMAGE_NAME = os.getenv("LOCAL_IMAGE_NAME")
 BENCHMARK = "customs-trade-classification"
 MAX_STEPS = 30
 MAX_TOTAL_REWARD = 1.0
@@ -191,7 +189,11 @@ async def run_task(
         )
         return 0.0, False, 0, []
 
-    env = await CustomsEnv.from_docker_image(IMAGE_NAME)
+    if LOCAL_IMAGE_NAME:
+        env = await CustomsEnv.from_docker_image(LOCAL_IMAGE_NAME)
+    else:
+        # Fallback to local server connection if no image is specified
+        env = CustomsEnv(port=7860)
 
     history: List[str] = []
     rewards: List[float] = []

@@ -24,9 +24,7 @@ MODEL_NAME = os.getenv(
 )
 
 
-IMAGE_NAME = os.getenv(
-    "IMAGE_NAME", "customs-trade-classification:latest"
-)
+LOCAL_IMAGE_NAME = os.getenv("LOCAL_IMAGE_NAME")
 BENCHMARK = "customs-trade-classification"
 MAX_STEPS = 30
 MAX_TOTAL_REWARD = 1.0
@@ -185,7 +183,11 @@ async def run_task(
         from models import CustomsAction  # type: ignore
     except ImportError:
         pass
-    env = CustomsEnv(base_url="http://127.0.0.1:7860")
+    if LOCAL_IMAGE_NAME:
+        env = await CustomsEnv.from_docker_image(LOCAL_IMAGE_NAME)
+    else:
+        # Fallback to local server connection if no image is specified
+        env = CustomsEnv(port=7860)
 
     history: List[str] = []
     rewards: List[float] = []
