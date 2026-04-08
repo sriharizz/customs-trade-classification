@@ -5,6 +5,7 @@
 # LICENSE file in the root directory of this source tree.
 
 # Multi-stage build using openenv-base
+# Force rebuild for rapidfuzz dependency cache bust
 ARG BASE_IMAGE=ghcr.io/meta-pytorch/openenv-base:latest
 FROM ${BASE_IMAGE} AS builder
 
