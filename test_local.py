@@ -187,7 +187,7 @@ async def run_task(
         env = await CustomsEnv.from_docker_image(LOCAL_IMAGE_NAME)
     else:
         # Fallback to local server connection if no image is specified
-        env = CustomsEnv(port=7860)
+        env = CustomsEnv(base_url="http://127.0.0.1:7860")
 
     history: List[str] = []
     rewards: List[float] = []
@@ -200,8 +200,14 @@ async def run_task(
     log_start(task=task_id, env=BENCHMARK, model=MODEL_NAME)
 
     try:
-        result = await env.reset(task_id=task_id, seed=0)
-        obs = result.observation
+        try:
+            result = await env.reset(task_id=task_id, seed=0)
+            obs = result.observation
+        except Exception as e:
+            print(f"[DEBUG] Failed to reset env for task {task_id}: {e}", flush=True)
+            log_step(step=0, action="reset", reward=0.0, done=True, error=str(e)[:80])
+            score = 0.0
+            return score, False, 0, []
 
         parse_error_count = 0
         for step in range(1, max_steps + 1):
@@ -254,10 +260,17 @@ async def run_task(
                     )
                     action_str = f"{fallback_type}=fallback"
 
-            result = await env.step(action)
-            obs = result.observation
-            reward = result.reward or 0.0
-            done = result.done
+            try:
+                result = await env.step(action)
+                obs = result.observation
+                reward = result.reward or 0.0
+                done = result.done
+            except Exception as e:
+                print(f"[DEBUG] Failed to execute step in env: {e}", flush=True)
+                error_msg = str(e)[:80]
+                result = None
+                reward = 0.0
+                done = True
 
             rewards.append(reward)
             steps_taken = step
