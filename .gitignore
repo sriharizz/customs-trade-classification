@@ -23,7 +23,6 @@ build/
 .pytest_cache/
 
 # Dependency lockfile (Docker build uses requirements.txt)
-uv.lock
 
 # Logs & temp outputs
 *.log
