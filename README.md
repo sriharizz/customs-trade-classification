@@ -152,42 +152,43 @@ customs-trade-classification/
 
 ## 🔬 Environment Architecture
 ```mermaid
-graph TD
+graph LR
     classDef llm fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
     classDef server fill:#1e293b,stroke:#22c55e,stroke-width:2px,color:#f8fafc;
     classDef db fill:#334155,stroke:#94a3b8,stroke-width:1px,color:#f8fafc;
+    classDef oneway fill:#020617,stroke:#8b5cf6,stroke-width:2px,color:#f8fafc,stroke-dasharray: 4;
 
     Agent("🤖 LLM Agent"):::llm
 
-    subgraph API ["FastAPI Server (Port 7860)"]
-        Router("POST /step"):::server
-    end
-
-    subgraph Core ["CustomsEnvironment Core"]
-        State("📝 CustomsState Model"):::db
+    subgraph Env ["CustomsEnvironment Core (Port 7860)"]
+        direction TB
+        State("📝 CustomsState Tracker"):::server
         
-        subgraph OneWay ["Strict One-Way State Machine"]
-            direction TB
-            C("Chapter") -->|"classify_chapter"| H("Heading")
-            H -->|"classify_heading"| S("Subheading")
-            S -->|"classify_subheading"| D("Duty Rate")
-            D -->|"check_duty"| SF("Sanctions")
-            SF -->|"check_sanctions"| V("Final Verdict")
+        subgraph Machine ["Strict One-Way Sequence"]
+            direction LR
+            C("Chapter") -->|grade| H("Heading")
+            H -->|grade| S("Subheading")
+            S -->|grade| D("Duty")
+            D -->|grade| SF("Sanctions")
+            SF -->|grade| V("Verdict")
         end
-        State -.->|"Tracks Attempts & Score"| OneWay
     end
 
-    subgraph Data ["In-Memory Databases"]
-        HTS[("📚 US HTS Database")]:::db
-        OFAC[("🚫 OFAC Sanctions List")]:::db
+    subgraph Data ["External Databases"]
+        direction TB
+        HTS[("📚 US HTS DB")]:::db
+        OFAC[("🚫 OFAC DB")]:::db
     end
 
-    Agent -->|"1. Posts JSON Action"| Router
-    Router -->|"2. Validates Request"| State
-    OneWay -->|"3. Grades & Locks Progress"| State
-    HTS -.->|"lookup_hs"| OneWay
-    OFAC -.->|"lookup_sanctions"| OneWay
-    State -->|"4. Returns JSON Observation"| Agent
+    Agent -->|"1. Posts JSON Action"| State
+    State -->|"2. Advances"| Machine
+    
+    Machine -.->|"lookup_hs"| HTS
+    Machine -.->|"lookup_sanctions"| OFAC
+    
+    Machine -->|"3. Returns Observation"| Agent
+    
+    class Machine oneway;
 ```
 
 ---
