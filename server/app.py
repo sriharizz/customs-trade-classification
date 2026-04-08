@@ -12,20 +12,12 @@ app = create_fastapi_app(
     CustomsObservation,
 )
 
-# Friendly root endpoint returning clean JSON metadata for visitors and automated checkers
+from fastapi.responses import RedirectResponse
+
+# Redirect root immediately to the FastAPI built-in Swagger UI Interface
 @app.get("/")
 def read_root():
-    return {
-        "project": "Customs Trade Classification Environment",
-        "description": "Meta PyTorch OpenEnv Hackathon 2026",
-        "status": "Running",
-        "endpoints": [
-            "POST /reset",
-            "POST /step",
-            "GET /health"
-        ],
-        "docs": "https://github.com/sriharizz/customs-trade-classification"
-    }
+    return RedirectResponse(url="/docs")
 
 # Explicit health check endpoint (used by Dockerfile HEALTHCHECK and HF Spaces)
 @app.get("/health")
