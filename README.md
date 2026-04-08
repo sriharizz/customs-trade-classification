@@ -1,3 +1,11 @@
+---
+title: Customs Trade Classification
+emoji: 🛃
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
 # 🛃 Customs Trade Classification — OpenEnv Environment
 
 > **A real-world autonomous compliance pipeline for the Meta PyTorch OpenEnv Hackathon.**
