@@ -12,6 +12,17 @@ app = create_fastapi_app(
     CustomsObservation,
 )
 
+# Friendly root endpoint for visitors to the Hugging Face Space
+@app.get("/")
+def read_root():
+    return {
+        "project": "Customs Trade Classification Environment",
+        "description": "Meta PyTorch OpenEnv Hackathon 2026",
+        "status": "Running",
+        "endpoints": ["POST /reset", "POST /step", "GET /health"],
+        "docs": "https://github.com/sriharizz/customs-trade-classification"
+    }
+
 # Explicit health check endpoint (used by Dockerfile HEALTHCHECK and HF Spaces)
 @app.get("/health")
 def health():
