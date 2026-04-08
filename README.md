@@ -151,34 +151,43 @@ customs-trade-classification/
 ---
 
 ## 🔬 Environment Architecture
+```mermaid
+graph TD
+    classDef llm fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef server fill:#1e293b,stroke:#22c55e,stroke-width:2px,color:#f8fafc;
+    classDef db fill:#334155,stroke:#94a3b8,stroke-width:1px,color:#f8fafc;
 
-```
-Agent (LLM)
-    │  JSON action
-    ▼
-┌─────────────────────────────┐
-│  FastAPI Server (port 7860) │
-│  POST /reset  POST /step    │
-└───────────────┬─────────────┘
-                │
-                ▼
-┌─────────────────────────────┐
-│     CustomsEnvironment      │
-│                             │
-│  ┌──────────────────────┐  │
-│  │    CustomsState      │  │  ← 18-field Pydantic model
-│  │  chapter_score: 0.15 │  │    session-isolated per reset()
-│  │  heading_score: 0.20 │  │
-│  │  sanctions_result: ? │  │
-│  └──────────────────────┘  │
-│                             │
-│  ┌──────────┐ ┌──────────┐ │
-│  │  HTS DB  │ │ OFAC DB  │ │  ← Loaded once at startup
-│  └──────────┘ └──────────┘ │
-└─────────────────────────────┘
-                │
-                ▼
-    Observation (JSON) → Agent
+    Agent("🤖 LLM Agent"):::llm
+
+    subgraph API ["FastAPI Server (Port 7860)"]
+        Router("POST /step"):::server
+    end
+
+    subgraph Core ["CustomsEnvironment Core"]
+        State("📝 CustomsState Model"):::db
+        
+        subgraph OneWay ["Strict One-Way State Machine"]
+            direction TB
+            C("Chapter") -->|"classify_chapter"| H("Heading")
+            H -->|"classify_heading"| S("Subheading")
+            S -->|"classify_subheading"| D("Duty Rate")
+            D -->|"check_duty"| SF("Sanctions")
+            SF -->|"check_sanctions"| V("Final Verdict")
+        end
+        State -.->|"Tracks Attempts & Score"| OneWay
+    end
+
+    subgraph Data ["In-Memory Databases"]
+        HTS[("📚 US HTS Database")]:::db
+        OFAC[("🚫 OFAC Sanctions List")]:::db
+    end
+
+    Agent -->|"1. Posts JSON Action"| Router
+    Router -->|"2. Validates Request"| State
+    OneWay -->|"3. Grades & Locks Progress"| State
+    HTS -.->|"lookup_hs"| OneWay
+    OFAC -.->|"lookup_sanctions"| OneWay
+    State -->|"4. Returns JSON Observation"| Agent
 ```
 
 ---
