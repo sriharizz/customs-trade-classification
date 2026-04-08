@@ -1,0 +1,53 @@
+name: customs-trade-classification
+version: "1.0.0"
+spec_version: 1
+type: environment
+description: >
+  A real-world customs trade classification environment where an AI agent
+  classifies shipments using the US Harmonized Tariff Schedule (HTS),
+  checks OFAC sanctions, and submits approve/hold verdicts. Includes
+  a live HTS lookup tool so the agent reasons over real tariff data
+  rather than relying on memorization.
+
+runtime: python
+app: server.app:app
+port: 7860
+
+tasks:
+  - id: task_easy
+    name: "Standard Shipment Classification"
+    difficulty: easy
+    max_steps: 15
+    reward_threshold: 0.80
+    description: >
+      Classify a non-sanctioned shipment with clear product specs.
+      HTS lookup tools available. Expected frontier score >= 0.80.
+
+  - id: task_medium
+    name: "Technically Ambiguous Classification"
+    difficulty: medium
+    max_steps: 20
+    reward_threshold: 0.60
+    description: >
+      Classify shipments at technical boundary conditions — motors
+      at power thresholds, dual-use goods, ambiguous chapter boundaries.
+      Expected frontier score 0.50 to 0.70.
+
+  - id: task_hard
+    name: "Sanctioned Country Dual-Use Classification"
+    difficulty: hard
+    max_steps: 30
+    reward_threshold: 0.40
+    description: >
+      Classify high-value shipments from OFAC-sanctioned countries
+      including dual-use and nuclear-adjacent equipment.
+      Agent must correctly flag and hold. Expected frontier score <= 0.40.
+
+tags:
+  - openenv
+  - real-world
+  - customs
+  - trade-compliance
+  - multi-step
+  - hs-classification
+  - ofac

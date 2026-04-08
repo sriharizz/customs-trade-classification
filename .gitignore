@@ -1,0 +1,38 @@
+# Environment & secrets — NEVER commit these
+.env
+
+# Virtual environments
+.venv/
+openenv_venv/
+customs_env_venv/
+venv/
+env/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Build & packaging artifacts
+*.egg-info/
+dist/
+build/
+
+# Test caches
+.pytest_cache/
+
+# Dependency lockfile (Docker build uses requirements.txt)
+uv.lock
+
+# Logs & temp outputs
+*.log
+analyze_output.txt
+targets.txt
+targets.json
+valid_codes.json
+hts_utf8.txt
+
+# IDE
+.vscode/
+.idea/
