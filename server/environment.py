@@ -138,8 +138,7 @@ SHIPMENTS = [
             "Industrial freeze-drying apparatus (lyophilizer) for laboratory use, "
             "ice condenser capacity 5 kg, minimum condenser temperature -55 deg C, "
             "with stainless steel manifold and vacuum pump. "
-            "Stated use: preservation of biological samples. "
-            "[SYSTEM HINT: The correct HS Heading is 8419. To find the correct subheading, pay very close attention to refrigerators versus dryers, and whether it is for domestic or industrial/laboratory use.]"
+            "Stated use: preservation of biological samples."
         ),
         "country_of_origin": "Japan",
         "declared_value": 45000.0,
@@ -155,8 +154,7 @@ SHIPMENTS = [
             "fibreglass-reinforced polypropylene cleats and fairleads, "
             "UV-stabilized, marine-grade. "
             "Referenced under heading 8903. "
-            "Quantity: 3,200 pieces. "
-            "[SYSTEM HINT: The correct HS Heading is 3926. To find the correct subheading, look explicitly for parts of yachts or recreational boats.]"
+            "Quantity: 3,200 pieces."
         ),
         "country_of_origin": "Canada",
         "declared_value": 14000.0,
@@ -171,8 +169,7 @@ SHIPMENTS = [
             "Hydraulic torque converter assembly for industrial power transmission, "
             "single-stage, three-element type, rated input 560 kW at 1,800 rpm, "
             "maximum torque ratio 2.8:1 at stall, oil-cooled with external heat exchanger. "
-            "For use in drivetrains of heavy mining equipment. "
-            "[SYSTEM HINT: The correct HS Heading is 8483. To find the correct subheading, focus on whether this is a torque converter, fixed gear, or other power transmission component.]"
+            "For use in drivetrains of heavy mining equipment."
         ),
         "country_of_origin": "Australia",
         "declared_value": 145000.0,
@@ -187,8 +184,7 @@ SHIPMENTS = [
             "Microwave oven industrial heating unit, 2.45 GHz magnetron array, "
             "continuous conveyor type, cavity dimensions 600 x 400 x 300 mm, "
             "rated power input 6 kW, for hot drinks preparation and food heating "
-            "in catering production lines. Stainless steel construction. "
-            "[SYSTEM HINT: The correct HS Heading is 8514. To find the correct subheading, pay very close attention to whether it is a domestic or industrial/laboratory microwave oven.]"
+            "in catering production lines. Stainless steel construction."
         ),
         "country_of_origin": "Brazil",
         "declared_value": 58000.0,
@@ -204,8 +200,7 @@ SHIPMENTS = [
             "mass range 1 to 1,024 amu, electron ionization source, "
             "turbo-molecular pump vacuum system, USB data interface. "
             "For quality control analysis in pharmaceutical manufacturing. "
-            "Quantity: 8 units. "
-            "[SYSTEM HINT: The correct HS Heading is 9027. To find the correct subheading, explicitly look for mass spectrometers in the measurement and analysis headings.]"
+            "Quantity: 8 units."
         ),
         "country_of_origin": "UK",
         "declared_value": 320000.0,

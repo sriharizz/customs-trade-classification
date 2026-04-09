@@ -308,6 +308,7 @@ async def run_task(
             rewards=rewards,
         )
 
+    score = max(0.01, score)
     return score, success, steps_taken, rewards
 
 

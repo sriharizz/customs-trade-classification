@@ -315,6 +315,8 @@ async def run_task(
             rewards=rewards,
         )
 
+    # Ensure absolute Hackathon compliance bounds for 0.0
+    score = max(0.01, score)
     return score, success, steps_taken, rewards
 
 
