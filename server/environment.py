@@ -29,7 +29,7 @@ REWARD_WEIGHTS = {
 
 TASK_CONFIG = {
     "task_easy":   {"max_steps": 15},
-    "task_medium": {"max_steps": 20},
+    "task_medium": {"max_steps": 12},
     "task_hard":   {"max_steps": 30},
 }
 

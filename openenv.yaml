@@ -26,7 +26,7 @@ tasks:
   - id: task_medium
     name: "Technically Ambiguous Classification"
     difficulty: medium
-    max_steps: 20
+    max_steps: 12
     reward_threshold: 0.60
     description: >
       Classify shipments at technical boundary conditions — motors
