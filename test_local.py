@@ -195,7 +195,7 @@ async def run_task(
     score = 0.0
     success = False
 
-    max_steps = {"task_easy": 15, "task_medium": 12, "task_hard": 30}[task_id]
+    max_steps = {"task_easy": 15, "task_medium": 20, "task_hard": 30}[task_id]
 
     log_start(task=task_id, env=BENCHMARK, model=MODEL_NAME)
 
