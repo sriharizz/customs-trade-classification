@@ -213,7 +213,7 @@ async def run_task(
             print(f"[DEBUG] Failed to reset env for task {task_id}: {e}", flush=True)
             # Log step 0 error, then gracefully fail this task
             log_step(step=0, action="reset", reward=0.0, done=True, error=str(e)[:80])
-            score = 0.0
+            score = 0.01
             return score, False, 0, []
 
         parse_error_count = 0

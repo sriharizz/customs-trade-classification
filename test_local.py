@@ -206,7 +206,7 @@ async def run_task(
         except Exception as e:
             print(f"[DEBUG] Failed to reset env for task {task_id}: {e}", flush=True)
             log_step(step=0, action="reset", reward=0.0, done=True, error=str(e)[:80])
-            score = 0.0
+            score = 0.01
             return score, False, 0, []
 
         parse_error_count = 0

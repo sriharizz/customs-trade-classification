@@ -53,7 +53,7 @@ SHIPMENTS = [
             "capacity 10 litres, with moulded-in handles, wall thickness 2.2 mm, "
             "natural colour. For household and industrial use. "
             "Quantity: 20,000 units packed on wooden pallets. Country of manufacture: Germany. "
-            "[SYSTEM HINT: The correct HS Chapter is 39 and the Heading is 3926. Use lookup_hs to find the exact subheading.]"
+            "[SYSTEM HINT: The correct HS Chapter is 39. Use lookup_hs to find the correct heading and subheading.]"
         ),
         "country_of_origin": "Germany",
         "declared_value": 18000.0,
@@ -70,7 +70,7 @@ SHIPMENTS = [
             "with heat-sealed seams and snap fasteners. "
             "Sizes S to XL, packed in individual polybags. "
             "Quantity: 5,000 pieces. Origin: Japan. "
-            "[SYSTEM HINT: The correct HS Chapter is 39 and the Heading is 3926. Use lookup_hs to find the exact subheading.]"
+            "[SYSTEM HINT: The correct HS Chapter is 39. Use lookup_hs to find the correct heading and subheading.]"
         ),
         "country_of_origin": "Japan",
         "declared_value": 22000.0,
@@ -87,7 +87,7 @@ SHIPMENTS = [
             "grey iron grade GG-25, machined finish on bore and rim. "
             "Used for energy storage in piston compressors. "
             "Quantity: 800 pieces. Manufacturer: Busan Precision Castings, South Korea. "
-            "[SYSTEM HINT: The correct HS Chapter is 84 and the Heading is 8483. Use lookup_hs to find the exact subheading.]"
+            "[SYSTEM HINT: The correct HS Chapter is 84. Use lookup_hs to find the correct heading and subheading.]"
         ),
         "country_of_origin": "South Korea",
         "declared_value": 35000.0,
@@ -103,7 +103,7 @@ SHIPMENTS = [
             "rated output 5 W at 50 Hz, 230V, permanent magnet rotor, "
             "for use in clock mechanisms and timer applications. "
             "Quantity: 50,000 units in ESD-safe trays. Origin: Taiwan. "
-            "[SYSTEM HINT: The correct HS Chapter is 85 and the Heading is 8501. Use lookup_hs to find the exact subheading.]"
+            "[SYSTEM HINT: The correct HS Chapter is 85. Use lookup_hs to find the correct heading and subheading.]"
         ),
         "country_of_origin": "Taiwan",
         "declared_value": 195000.0,
@@ -120,7 +120,7 @@ SHIPMENTS = [
             "accuracy ±0.1% full scale, 4–20mA analogue output, ATEX Zone 2 certified. "
             "For use in combustion monitoring in industrial boilers. "
             "Quantity: 120 units. Manufacturer: Yokogawa, Australia. "
-            "[SYSTEM HINT: The correct HS Chapter is 90 and the Heading is 9027. Use lookup_hs to find the exact subheading.]"
+            "[SYSTEM HINT: The correct HS Chapter is 90. Use lookup_hs to find the correct heading and subheading.]"
         ),
         "country_of_origin": "Australia",
         "declared_value": 96000.0,
