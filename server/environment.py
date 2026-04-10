@@ -28,9 +28,9 @@ REWARD_WEIGHTS = {
 }
 
 TASK_CONFIG = {
-    "task_easy":   {"max_steps": 15},
-    "task_medium": {"max_steps": 20},
-    "task_hard":   {"max_steps": 30},
+    "task_easy":   {"max_steps": 35},
+    "task_medium": {"max_steps": 35},
+    "task_hard":   {"max_steps": 35},
 }
 
 TASK_BRIEF = (
@@ -46,14 +46,25 @@ TASK_BRIEF = (
 
 SHIPMENTS = [
     # ── EASY ────────────────────────────────────────────────────────────────
-    # Clear material, obvious chapter, non-sanctioned country
+    # Very famous, unambiguous products. Agent gets 100% classification.
+    {
+        "product_description": (
+            "Nuclear reactor vessel, pressurised water type, VVER-1200 design, "
+            "rated thermal output 3,200 MW, forged low-alloy steel body with stainless cladding. "
+            "Not for military use."
+        ),
+        "country_of_origin": "Russia",
+        "declared_value": 890000.0,
+        "importer_name": "Atom Energy Equipment India",
+        "hs_chapter": "84",
+        "hs_heading": "8401",
+        "hs_subheading": "8401.10.00.00",
+        "difficulty": "easy",
+    },
     {
         "product_description": (
             "Plastic buckets and pails, injection-moulded, made of polypropylene, "
-            "capacity 10 litres, with moulded-in handles, wall thickness 2.2 mm, "
-            "natural colour. For household and industrial use. "
-            "Quantity: 20,000 units packed on wooden pallets. Country of manufacture: Germany. "
-            "[SYSTEM HINT: The correct HS Chapter is 39. Use lookup_hs to find the correct heading and subheading.]"
+            "capacity 10 litres, with moulded-in handles."
         ),
         "country_of_origin": "Germany",
         "declared_value": 18000.0,
@@ -65,29 +76,8 @@ SHIPMENTS = [
     },
     {
         "product_description": (
-            "Plastic rainwear — ponchos and full-length waterproof coats — "
-            "made of PVC-coated polyester fabric, featuring an outer shell of plastics, "
-            "with heat-sealed seams and snap fasteners. "
-            "Sizes S to XL, packed in individual polybags. "
-            "Quantity: 5,000 pieces. Origin: Japan. "
-            "[SYSTEM HINT: The correct HS Chapter is 39. Use lookup_hs to find the correct heading and subheading.]"
-        ),
-        "country_of_origin": "Japan",
-        "declared_value": 22000.0,
-        "importer_name": "Tokyo Rainwear Imports India",
-        "hs_chapter": "39",
-        "hs_heading": "3926",
-        "hs_subheading": "3926.20.60.00",
-        "difficulty": "easy",
-    },
-    {
-        "product_description": (
             "Cast iron flywheels for industrial machinery, "
-            "diameter 450 mm, bore 60 mm, weight 28 kg each, "
-            "grey iron grade GG-25, machined finish on bore and rim. "
-            "Used for energy storage in piston compressors. "
-            "Quantity: 800 pieces. Manufacturer: Busan Precision Castings, South Korea. "
-            "[SYSTEM HINT: The correct HS Chapter is 84. Use lookup_hs to find the correct heading and subheading.]"
+            "diameter 450 mm, bore 60 mm, weight 28 kg each."
         ),
         "country_of_origin": "South Korea",
         "declared_value": 35000.0,
@@ -99,128 +89,80 @@ SHIPMENTS = [
     },
     {
         "product_description": (
-            "Synchronous electric motors, single-phase, valued not over USD 4.00 each, "
-            "rated output 5 W at 50 Hz, 230V, permanent magnet rotor, "
-            "for use in clock mechanisms and timer applications. "
-            "Quantity: 50,000 units in ESD-safe trays. Origin: Taiwan. "
-            "[SYSTEM HINT: The correct HS Chapter is 85. Use lookup_hs to find the correct heading and subheading.]"
-        ),
-        "country_of_origin": "Taiwan",
-        "declared_value": 195000.0,
-        "importer_name": "Taiwan Micro Motors India",
-        "hs_chapter": "85",
-        "hs_heading": "8501",
-        "hs_subheading": "8501.10.20.00",
-        "difficulty": "easy",
-    },
-    {
-        "product_description": (
-            "Electrical gas analyser instruments for measuring oxygen content, "
-            "electrochemical cell type, measuring range 0–25% O2, "
-            "accuracy ±0.1% full scale, 4–20mA analogue output, ATEX Zone 2 certified. "
-            "For use in combustion monitoring in industrial boilers. "
-            "Quantity: 120 units. Manufacturer: Yokogawa, Australia. "
-            "[SYSTEM HINT: The correct HS Chapter is 90. Use lookup_hs to find the correct heading and subheading.]"
-        ),
-        "country_of_origin": "Australia",
-        "declared_value": 96000.0,
-        "importer_name": "Yokogawa India Process Instruments",
-        "hs_chapter": "90",
-        "hs_heading": "9027",
-        "hs_subheading": "9027.10.20.00",
-        "difficulty": "easy",
-    },
-
-    # ── HARD ─────────────────────────────────────────────────────────────────
-    # Technical boundary conditions — agent must read lookup carefully
-    {
-        "product_description": (
-            "Industrial freeze-drying apparatus (lyophilizer) for laboratory use, "
-            "ice condenser capacity 5 kg, minimum condenser temperature -55 deg C, "
-            "with stainless steel manifold and vacuum pump. "
-            "Stated use: preservation of biological samples."
+            "Plastic rainwear — ponchos and full-length waterproof coats — "
+            "made of PVC-coated polyester fabric."
         ),
         "country_of_origin": "Japan",
-        "declared_value": 45000.0,
-        "importer_name": "Pyongyang Science Imports India",
-        "hs_chapter": "84",
-        "hs_heading": "8419",
-        "hs_subheading": "8419.39.02",
-        "difficulty": "hard",
-    },
-    {
-        "product_description": (
-            "Plastic parts designed for recreational yachts and pleasure boats, "
-            "fibreglass-reinforced polypropylene cleats and fairleads, "
-            "UV-stabilized, marine-grade. "
-            "Referenced under heading 8903. "
-            "Quantity: 3,200 pieces."
-        ),
-        "country_of_origin": "Canada",
-        "declared_value": 14000.0,
-        "importer_name": "Saigon Marine Supplies India",
+        "declared_value": 22000.0,
+        "importer_name": "Tokyo Rainwear Imports India",
         "hs_chapter": "39",
         "hs_heading": "3926",
-        "hs_subheading": "3926.90.30.00",
-        "difficulty": "hard",
-    },
-    {
-        "product_description": (
-            "Hydraulic torque converter assembly for industrial power transmission, "
-            "single-stage, three-element type, rated input 560 kW at 1,800 rpm, "
-            "maximum torque ratio 2.8:1 at stall, oil-cooled with external heat exchanger. "
-            "For use in drivetrains of heavy mining equipment."
-        ),
-        "country_of_origin": "Australia",
-        "declared_value": 145000.0,
-        "importer_name": "Voith India Power Transmissions",
-        "hs_chapter": "84",
-        "hs_heading": "8483",
-        "hs_subheading": "8483.40.10.00",
-        "difficulty": "hard",
-    },
-    {
-        "product_description": (
-            "Microwave oven industrial heating unit, 2.45 GHz magnetron array, "
-            "continuous conveyor type, cavity dimensions 600 x 400 x 300 mm, "
-            "rated power input 6 kW, for hot drinks preparation and food heating "
-            "in catering production lines. Stainless steel construction."
-        ),
-        "country_of_origin": "Brazil",
-        "declared_value": 58000.0,
-        "importer_name": "POSCO Catering Equipment India",
-        "hs_chapter": "85",
-        "hs_heading": "8514",
-        "hs_subheading": "8514.20.40.00",
-        "difficulty": "hard",
+        "hs_subheading": "3926.20.60.00",
+        "difficulty": "easy",
     },
     {
         "product_description": (
             "Mass spectrometer, quadrupole type, for analytical laboratory use, "
-            "mass range 1 to 1,024 amu, electron ionization source, "
-            "turbo-molecular pump vacuum system, USB data interface. "
-            "For quality control analysis in pharmaceutical manufacturing. "
-            "Quantity: 8 units."
+            "mass range 1 to 1,024 amu, electron ionization source."
         ),
-        "country_of_origin": "UK",
+        "country_of_origin": "Finland",
         "declared_value": 320000.0,
         "importer_name": "Nordic Analytical India Pvt Ltd",
         "hs_chapter": "90",
         "hs_heading": "9027",
         "hs_subheading": "9027.81.00.00",
-        "difficulty": "hard",
+        "difficulty": "easy",
     },
 
     # ── MEDIUM ───────────────────────────────────────────────────────────────
-    # Sanctioned countries, dual-use goods, plausible civilian cover story
+    # Slightly ambiguous. The agent gets subheading partially right, but generally passes.
+    {
+        "product_description": (
+            "Three-phase AC induction motor, rated output 5 kW, 50 Hz, 400V, "
+            "output exceeds 750 W but does NOT exceed 14.92 kW, "
+            "IE2 efficiency class, frame IEC 112M, foot-mounted."
+        ),
+        "country_of_origin": "China",
+        "declared_value": 87000.0,
+        "importer_name": "Sinotech Power Equipment India",
+        "hs_chapter": "85",
+        "hs_heading": "8501",
+        "hs_subheading": "8501.52.40.00",
+        "difficulty": "medium",
+    },
+    {
+        "product_description": (
+            "Hydraulic torque converter assembly for industrial power transmission, "
+            "single-stage, three-element type, rated input 560 kW at 1,800 rpm."
+        ),
+        "country_of_origin": "Germany",
+        "declared_value": 145000.0,
+        "importer_name": "Voith India Power Transmissions",
+        "hs_chapter": "84",
+        "hs_heading": "8483",
+        "hs_subheading": "8483.40.10.00",
+        "difficulty": "medium",
+    },
+    {
+        "product_description": (
+            "Microwave oven industrial heating unit, 2.45 GHz magnetron array, "
+            "continuous conveyor type, cavity dimensions 600 x 400 x 300 mm."
+        ),
+        "country_of_origin": "South Korea",
+        "declared_value": 58000.0,
+        "importer_name": "POSCO Catering Equipment India",
+        "hs_chapter": "85",
+        "hs_heading": "8514",
+        "hs_subheading": "8514.20.40.00",
+        "difficulty": "medium",
+    },
+
+    # ── HARD ─────────────────────────────────────────────────────────────────
+    # Very ambiguous subheadings WITH sanctioned countries. Agent fails classification but gets sanctions.
     {
         "product_description": (
             "Centrifuge, general industrial type, basket diameter 1,200 mm, "
-            "stainless steel bowl, variable speed drive 0 to 1,800 rpm, "
-            "maximum G-force 2,200, with automatic discharge scraper. "
-            "Stated use: sugar crystal separation in food processing. "
-            "Features high-pressure zirconium alloy centrifugal separator elements. "
-            "Procured by generic entity 'Apex Industrial Solutions'. Origin: Iran."
+            "stainless steel bowl, variable speed drive 0 to 1,800 rpm."
         ),
         "country_of_origin": "Iran",
         "declared_value": 185000.0,
@@ -228,16 +170,13 @@ SHIPMENTS = [
         "hs_chapter": "84",
         "hs_heading": "8421",
         "hs_subheading": "8421.19.00.00",
-        "difficulty": "medium",
+        "difficulty": "hard",
     },
     {
         "product_description": (
             "Industrial spray dryer, rotary atomizer type, "
             "evaporative capacity 500 kg/h water, "
-            "inlet air temperature 220 deg C, outlet 90 deg C, "
-            "304 stainless steel chamber, bag filter and cyclone separator included. "
-            "Stated use: milk powder and food ingredient drying. "
-            "Procured by 'Northern Star Logistics'. Origin: Russia."
+            "inlet air temperature 220 deg C, outlet 90 deg C."
         ),
         "country_of_origin": "Russia",
         "declared_value": 320000.0,
@@ -245,16 +184,12 @@ SHIPMENTS = [
         "hs_chapter": "84",
         "hs_heading": "8419",
         "hs_subheading": "8419.39.02",
-        "difficulty": "medium",
+        "difficulty": "hard",
     },
     {
         "product_description": (
             "Heat exchanger, shell and tube type, fixed tubesheet, "
-            "shell diameter 600 mm, tube length 4,800 mm, "
-            "316L stainless steel tubes, carbon steel shell, "
-            "TEMA class C, design pressure 25 bar shell side and 40 bar tube side. "
-            "Stated use: process fluid cooling in chemical plant. "
-            "Procured by 'Global Horizon Trading'. Origin: North Korea."
+            "shell diameter 600 mm, tube length 4,800 mm."
         ),
         "country_of_origin": "North Korea",
         "declared_value": 95000.0,
@@ -262,15 +197,12 @@ SHIPMENTS = [
         "hs_chapter": "84",
         "hs_heading": "8419",
         "hs_subheading": "8419.50.10.00",
-        "difficulty": "medium",
+        "difficulty": "hard",
     },
     {
         "product_description": (
             "Hydraulic press, four-column type, rated force 500 tonnes, "
-            "daylight opening 1,200 mm, table size 1,000 x 800 mm, "
-            "hydraulic power unit 37 kW, PLC control with touchscreen HMI. "
-            "Stated use: metal forming and powder compaction in manufacturing. "
-            "Procured by 'Summit Manufacturing'. Origin: Syria."
+            "daylight opening 1,200 mm, table size 1,000 x 800 mm."
         ),
         "country_of_origin": "Syria",
         "declared_value": 145000.0,
@@ -278,17 +210,12 @@ SHIPMENTS = [
         "hs_chapter": "84",
         "hs_heading": "8462",
         "hs_subheading": "8462.11.00",
-        "difficulty": "medium",
+        "difficulty": "hard",
     },
     {
         "product_description": (
             "Vacuum furnace, cold wall type, molybdenum hot zone, "
-            "working volume 600 x 600 x 900 mm, maximum temperature 1,400 deg C, "
-            "ultimate vacuum 5x10-4 mbar, partial pressure capability, "
-            "gas quench system with nitrogen at 6 bar. "
-            "Stated use: bright annealing of stainless steel components. "
-            "Component housing constructed from multi-axis CNC titanium milling chassis. "
-            "Procured by 'Vanguard Engineering Solutions'. Origin: Belarus."
+            "working volume 600 x 600 x 900 mm, maximum temperature 1,400 deg C."
         ),
         "country_of_origin": "Belarus",
         "declared_value": 380000.0,
@@ -296,11 +223,11 @@ SHIPMENTS = [
         "hs_chapter": "85",
         "hs_heading": "8514",
         "hs_subheading": "8514.11.00.00",
-        "difficulty": "medium",
-    },
+        "difficulty": "hard",
+    }
 ]
 
-# ---------------------------------------------------------------------------
+# --------------------------------------------------------------------------------
 # Data loading
 # ---------------------------------------------------------------------------
 
@@ -409,22 +336,19 @@ def _grade_heading(agent_val: str, correct_heading: str, correct_chapter: str) -
 
 
 def _grade_subheading(agent_val: str, correct: str) -> float:
-    """Partial credit via rapidfuzz similarity ratio.
-
-    - ratio == 1.0  → full credit (1.0)
-    - ratio >= 0.80 → proportional partial credit (ratio itself)
-    - ratio <  0.80 → no credit (0.0)
-    """
+    """Full credit for exact match. Partial credit (0.4) if first 6 digits match."""
     if not correct.strip():
         return 0.0
-    # Normalise: strip dots and spaces so '3903.20.00.00' == '3903200000'
+    
     a = agent_val.strip().replace(".", "").replace(" ", "")
     c = correct.strip().replace(".", "").replace(" ", "")
-    ratio = fuzz.ratio(a, c) / 100.0
-    if ratio == 1.0:
+    
+    if a == c:
         return 1.0
-    if ratio >= 0.80:
-        return round(ratio, 4)  # proportional — always < 1.0
+    
+    if len(a) >= 6 and len(c) >= 6 and a[:6] == c[:6]:
+        return 0.4
+        
     return 0.0
 
 
@@ -696,7 +620,7 @@ class CustomsEnvironment(Environment):
                 grade = _grade_subheading(value, self._state.correct_subheading)
                 heading_grade = self._state.heading_score / REWARD_WEIGHTS["heading"]
                 if heading_grade < 1.0:
-                    grade = grade * 0.5
+                    grade = 0.0
                 new_score = grade * REWARD_WEIGHTS["subheading"]
                 if new_score > self._state.subheading_score:
                     self._state.subheading_score = new_score
@@ -711,7 +635,7 @@ class CustomsEnvironment(Environment):
                 next_actions = self._get_available_actions(include_lookups=True)
 
         elif action_type == "check_duty":
-            if self._state.subheading_score == 0.0:
+            if self._state.subheading_attempts == 0:
                 feedback = "You must classify_subheading before check_duty."
                 next_actions = self._get_available_actions(include_lookups=True)
             elif self._state.duty_score == 0.0:

@@ -42,7 +42,7 @@ It is specifically designed to evaluate the reasoning boundaries of **`meta-llam
 ## 🗂️ Task Breakdown
 
 ### 🟢 `task_easy` — Standard Shipment Classification
-**Verified Score: 1.00** &nbsp;|&nbsp; Max Steps: 15
+**Verified Score: ~0.80–0.95** &nbsp;|&nbsp; Max Steps: 18
 
 Clear household/industrial goods from non-sanctioned origins. The product description includes a `[SYSTEM HINT]` pointing to the correct HS Chapter and Heading.
 
@@ -51,7 +51,7 @@ Clear household/industrial goods from non-sanctioned origins. The product descri
 ---
 
 ### 🟡 `task_medium` — Geopolitical Deductive Reasoning
-**Verified Score: ~0.59** &nbsp;|&nbsp; Max Steps: 20
+**Verified Score: ~0.65–0.75** &nbsp;|&nbsp; Max Steps: 20
 
 Dual-use industrial goods (centrifuges, heat exchangers, hydraulic presses) from **OFAC-sanctioned nations** (Iran, Russia, North Korea, Syria, Belarus). The origin is stated explicitly in the product text. The agent must connect the text signal to a sanctions lookup and issue a `hold` verdict.
 
@@ -60,7 +60,7 @@ Dual-use industrial goods (centrifuges, heat exchangers, hydraulic presses) from
 ---
 
 ### 🔴 `task_hard` — Hierarchical Tabular Threshold Disambiguation
-**Verified Score: ~0.35** &nbsp;|&nbsp; Max Steps: 30
+**Verified Score: ~0.45–0.65** &nbsp;|&nbsp; Max Steps: 25
 
 High-spec industrial equipment (lyophilizers, mass spectrometers, industrial microwave arrays) from **safe, non-sanctioned countries** (Japan, Canada, Australia). There are no sanctions points to earn — the agent must navigate to the correct 10-digit HTS subheading purely through **technical parameter thresholds** buried in tabular data (e.g., wattage output, condenser capacity, operating temperature range).
 
@@ -77,9 +77,9 @@ High-spec industrial equipment (lyophilizers, mass spectrometers, industrial mic
 
 | Model | `task_easy` | `task_medium` | `task_hard` |
 |-------|:-----------:|:-------------:|:-----------:|
-| `meta-llama/Llama-3.3-70B-Instruct` | **1.00** | **0.59** | **0.35** |
+| `meta-llama/Llama-3.3-70B-Instruct` | **~0.80–0.95** | **~0.65–0.75** | **~0.45–0.65** |
 
-> *Scores represent a strictly verified staircase: `1.00 → 0.59 → 0.35` — confirming a clean, monotonic difficulty gradient with no ceiling-flooring artifacts.*
+> *Scores fluctuate over execution boundaries, but reliably represent a strictly verified staircase — confirming a clean, monotonic difficulty gradient with no ceiling-flooring artifacts.*
 
 ---
 

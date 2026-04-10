@@ -195,7 +195,7 @@ async def run_task(
     score = 0.0
     success = False
 
-    max_steps = {"task_easy": 15, "task_medium": 20, "task_hard": 30}[task_id]
+    max_steps = {"task_easy": 18, "task_medium": 20, "task_hard": 25}[task_id]
 
     log_start(task=task_id, env=BENCHMARK, model=MODEL_NAME)
 
@@ -308,7 +308,8 @@ async def run_task(
             rewards=rewards,
         )
 
-    score = max(0.01, score)
+    # Ensure absolute Hackathon compliance bounds
+    score = min(max(score, 0.01), 0.99)
     return score, success, steps_taken, rewards
 
 

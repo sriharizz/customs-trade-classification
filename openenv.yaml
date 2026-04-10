@@ -17,7 +17,7 @@ tasks:
   - id: task_easy
     name: "Standard Shipment Classification"
     difficulty: easy
-    max_steps: 15
+    max_steps: 18
     reward_threshold: 0.80
     description: >
       Classify a non-sanctioned shipment with clear product specs.
@@ -36,7 +36,7 @@ tasks:
   - id: task_hard
     name: "Sanctioned Country Dual-Use Classification"
     difficulty: hard
-    max_steps: 30
+    max_steps: 25
     reward_threshold: 0.40
     description: >
       Classify high-value shipments from OFAC-sanctioned countries

@@ -149,8 +149,8 @@ def get_model_action(
     response = client.chat.completions.create(
         model=MODEL_NAME,
         messages=messages,
-        max_tokens=300,
-        temperature=0.1,
+        max_tokens=500,
+        temperature=0,
     )
 
     raw = response.choices[0].message.content.strip()
@@ -201,13 +201,13 @@ async def run_task(
     score = 0.0
     success = False
 
-    max_steps = {"task_easy": 15, "task_medium": 20, "task_hard": 30}[task_id]
+    max_steps = {"task_easy": 18, "task_medium": 20, "task_hard": 25}[task_id]
 
     log_start(task=task_id, env=BENCHMARK, model=MODEL_NAME)
 
     try:
         try:
-            result = await env.reset(task_id=task_id)
+            result = await env.reset(task_id=task_id, seed=0)
             obs = result.observation
         except Exception as e:
             print(f"[DEBUG] Failed to reset env for task {task_id}: {e}", flush=True)
@@ -315,8 +315,8 @@ async def run_task(
             rewards=rewards,
         )
 
-    # Ensure absolute Hackathon compliance bounds for 0.0
-    score = max(0.01, score)
+    # Ensure absolute Hackathon compliance bounds for 0.0 AND 1.0
+    score = min(max(score, 0.01), 0.99)
     return score, success, steps_taken, rewards
 
 
